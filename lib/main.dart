@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,27 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void decrement() => print('Decrement');
-void increment() => print('Increment');
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key});
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
+  void decrement() {
+    setState(() {
+      count--;
+    });
+  }
+
+  void increment() {
+    setState(() {
+      count++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +52,12 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            '0',
-            style: TextStyle(fontSize: 100, color: Colors.white),
+          Text(
+            '$count',
+            style: const TextStyle(fontSize: 100, color: Colors.white),
+          ),
+          const SizedBox(
+            height: 32,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +79,9 @@ class HomePage extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
+              ),
+              const SizedBox(
+                width: 32,
               ),
               TextButton(
                 onPressed: increment,
